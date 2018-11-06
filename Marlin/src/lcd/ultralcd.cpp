@@ -2676,21 +2676,38 @@ void lcd_quick_feedback(const bool clear_buttons) {
     #endif
         MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
 
+    // Set absolute coordinates
+    //MENU_ITEM(gcode, _UxGT("Use absolute XYZ"), PSTR("G90"));
+
+    // Go relative, set ZERO
+    //MENU_ITEM(gcode, _UxGT("Use relative XYZ, set zero"), PSTR("G91\nG92 X0 Y0 Z0"));
+
     //
     // Auto Home
     //
-    MENU_ITEM(gcode, MSG_AUTO_HOME, PSTR("G28"));
-    #if ENABLED(INDIVIDUAL_AXIS_HOMING_MENU)
-      MENU_ITEM(gcode, MSG_AUTO_HOME_X, PSTR("G28 X"));
-      MENU_ITEM(gcode, MSG_AUTO_HOME_Y, PSTR("G28 Y"));
-      MENU_ITEM(gcode, MSG_AUTO_HOME_Z, PSTR("G28 Z"));
-    #endif
+    //MENU_ITEM(gcode, MSG_AUTO_HOME, PSTR("G28"));
+    MENU_ITEM(gcode, _UxGT("Auto home XY"), PSTR("G28 XY"));
+
+    // Set 0,0,0
+    MENU_ITEM(gcode, _UxGT("Set 0,0,0"), PSTR("G92 X0 Y0 Z0"));
+
+    // Set 0,0,0, go Z5
+    MENU_ITEM(gcode, _UxGT("Set 0,0,0 G0 Z5"), PSTR("G92 X0 Y0 Z0\nG0 Z5"));
+
+    // Go to 0,0,0
+    MENU_ITEM(gcode, _UxGT("Go to 0,0,0"), PSTR("G0 X0 Y0 Z0"));
 
     //
     // TMC Z Calibration
     //
     #if ENABLED(TMC_Z_CALIBRATION)
       MENU_ITEM(gcode, MSG_TMC_Z_CALIBRATION, PSTR("G28\nM915"));
+    #endif
+
+    #if ENABLED(INDIVIDUAL_AXIS_HOMING_MENU)
+      MENU_ITEM(gcode, MSG_AUTO_HOME_X, PSTR("G28 X"));
+      MENU_ITEM(gcode, MSG_AUTO_HOME_Y, PSTR("G28 Y"));
+      MENU_ITEM(gcode, MSG_AUTO_HOME_Z, PSTR("G28 Z"));
     #endif
 
     //

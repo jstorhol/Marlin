@@ -34,7 +34,7 @@
 // Heaters / Fans
 //
 // Power outputs EFBF or EFBE
-#define MOSFET_D_PIN 7
+//#define MOSFET_D_PIN 7
 
 //
 // CS Pins wired to avoid conflict with the LCD

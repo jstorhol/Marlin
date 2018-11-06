@@ -196,9 +196,9 @@
  * The fan will turn on automatically whenever any stepper is enabled
  * and turn off after a set period after all steppers are turned off.
  */
-//#define USE_CONTROLLER_FAN
+#define USE_CONTROLLER_FAN
 #if ENABLED(USE_CONTROLLER_FAN)
-  //#define CONTROLLER_FAN_PIN -1        // Set a custom pin for the controller fan
+  #define CONTROLLER_FAN_PIN 9        // Set a custom pin for the controller fan
   #define CONTROLLERFAN_SECS 60          // Duration in seconds for the fan to run after all motors are disabled
   #define CONTROLLERFAN_SPEED 255        // 255 == full speed
 #endif
@@ -260,13 +260,13 @@
 /**
  * M355 Case Light on-off / brightness
  */
-//#define CASE_LIGHT_ENABLE
+#define CASE_LIGHT_ENABLE
 #if ENABLED(CASE_LIGHT_ENABLE)
-  //#define CASE_LIGHT_PIN 4                  // Override the default pin if needed
+  #define CASE_LIGHT_PIN 7                  // Override the default pin if needed
   #define INVERT_CASE_LIGHT false             // Set true if Case Light is ON when pin is LOW
   #define CASE_LIGHT_DEFAULT_ON true          // Set default power-up state on
-  #define CASE_LIGHT_DEFAULT_BRIGHTNESS 105   // Set default power-up brightness (0-255, requires PWM pin)
-  //#define MENU_ITEM_CASE_LIGHT              // Add a Case Light option to the LCD main menu
+  #define CASE_LIGHT_DEFAULT_BRIGHTNESS 50   // Set default power-up brightness (0-255, requires PWM pin)
+  #define MENU_ITEM_CASE_LIGHT              // Add a Case Light option to the LCD main menu
   //#define CASE_LIGHT_USE_NEOPIXEL           // Use Neopixel LED as case light, requires NEOPIXEL_LED.
   #if ENABLED(CASE_LIGHT_USE_NEOPIXEL)
     #define CASE_LIGHT_NEOPIXEL_COLOR { 255, 255, 255, 255 } // { Red, Green, Blue, White }
@@ -281,7 +281,7 @@
 
 // If you want endstops to stay on (by default) even when not homing
 // enable this option. Override at any time with M120, M121.
-//#define ENDSTOPS_ALWAYS_ON_DEFAULT
+#define ENDSTOPS_ALWAYS_ON_DEFAULT
 
 // @section extras
 
@@ -326,7 +326,7 @@
 #if ENABLED(Z_DUAL_STEPPER_DRIVERS)
   //#define Z_DUAL_ENDSTOPS
   #if ENABLED(Z_DUAL_ENDSTOPS)
-    #define Z2_USE_ENDSTOP _XMAX_
+    #define Z2_USE_ENDSTOP _XMAX_AB
     #define Z_DUAL_ENDSTOPS_ADJUSTMENT  0
   #endif
 #endif
@@ -381,7 +381,7 @@
 #define Y_HOME_BUMP_MM 7
 #define Z_HOME_BUMP_MM 3
 #define HOMING_BUMP_DIVISOR { 4, 4, 6 }  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
-//#define QUICK_HOME                     // If homing includes X and Y, do a diagonal move initially
+#define QUICK_HOME                     // If homing includes X and Y, do a diagonal move initially
 
 // When G28 is called, this option will make Y home before X
 //#define HOME_Y_BEFORE_X
@@ -643,7 +643,7 @@
    * This feature must be enabled with "M540 S1" or from the LCD menu.
    * To have any effect, endstops must be enabled during SD printing.
    */
-  //#define ABORT_ON_ENDSTOP_HIT_FEATURE_ENABLED
+  #define ABORT_ON_ENDSTOP_HIT_FEATURE_ENABLED
 
   /**
    * This option makes it easier to print the same SD Card file again.
@@ -818,8 +818,8 @@
 #if ENABLED(ARC_SUPPORT)
   #define MM_PER_ARC_SEGMENT  .15   // Length of each arc segment
   #define N_ARC_CORRECTION   25   // Number of intertpolated segments between corrections
-  //#define ARC_P_CIRCLES         // Enable the 'P' parameter to specify complete circles
-  //#define CNC_WORKSPACE_PLANES  // Allow G2/G3 to operate in XY, ZX, or YZ planes
+  #define ARC_P_CIRCLES         // Enable the 'P' parameter to specify complete circles
+  #define CNC_WORKSPACE_PLANES  // Allow G2/G3 to operate in XY, ZX, or YZ planes
 #endif
 
 // Support for G5 with XYZE destination and IJPQ offsets. Requires ~2666 bytes.
@@ -1373,15 +1373,15 @@
  *
  * See http://marlinfw.org/docs/configuration/laser_spindle.html for more config details.
  */
-//#define SPINDLE_LASER_ENABLE
+#define SPINDLE_LASER_ENABLE
 #if ENABLED(SPINDLE_LASER_ENABLE)
 
-  #define SPINDLE_LASER_ENABLE_INVERT   false  // set to "true" if the on/off function is reversed
-  #define SPINDLE_LASER_PWM             true   // set to true if your controller supports setting the speed/power
+  #define SPINDLE_LASER_ENABLE_INVERT   true  // set to "true" if the on/off function is reversed
+  #define SPINDLE_LASER_PWM             false   // set to true if your controller supports setting the speed/power
   #define SPINDLE_LASER_PWM_INVERT      true   // set to "true" if the speed/power goes up when you want it to go slower
   #define SPINDLE_LASER_POWERUP_DELAY   5000   // delay in milliseconds to allow the spindle/laser to come up to speed/power
   #define SPINDLE_LASER_POWERDOWN_DELAY 5000   // delay in milliseconds to allow the spindle to stop
-  #define SPINDLE_DIR_CHANGE            true   // set to true if your spindle controller supports changing spindle direction
+  #define SPINDLE_DIR_CHANGE            false   // set to true if your spindle controller supports changing spindle direction
   #define SPINDLE_INVERT_DIR            false
   #define SPINDLE_STOP_ON_DIR_CHANGE    true   // set to true if Marlin should stop the spindle before changing rotation direction
 
@@ -1444,7 +1444,7 @@
  * Enables G53 and G54-G59.3 commands to select coordinate systems
  * and G92.1 to reset the workspace to native machine space.
  */
-//#define CNC_COORDINATE_SYSTEMS
+#define CNC_COORDINATE_SYSTEMS
 
 /**
  * M43 - display pin status, watch pins for changes, watch endstops & toggle LED, Z servo probe test, toggle pins

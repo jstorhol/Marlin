@@ -619,6 +619,13 @@ void kill(const char* lcd_msg) {
     suicide();
   #endif
 
+  // from src/gcode/M3-M5.cpp
+  WRITE(SPINDLE_LASER_ENABLE_PIN, !SPINDLE_LASER_ENABLE_INVERT);
+  #if ENABLED(SPINDLE_LASER_PWM)
+    analogWrite(SPINDLE_LASER_PWM_PIN, SPINDLE_LASER_PWM_INVERT ? 255 : 
+0);
+  #endif
+
   while (1) {
     #if ENABLED(USE_WATCHDOG)
       watchdog_reset();
@@ -939,6 +946,12 @@ void loop() {
         wait_for_heatup = false;
         #if ENABLED(POWER_LOSS_RECOVERY)
           card.removeJobRecoveryFile();
+        #endif
+
+        // from src/gcode/M3-M5.cpp
+        WRITE(SPINDLE_LASER_ENABLE_PIN, !SPINDLE_LASER_ENABLE_INVERT);
+        #if ENABLED(SPINDLE_LASER_PWM)
+            analogWrite(SPINDLE_LASER_PWM_PIN, SPINDLE_LASER_PWM_INVERT ? 255 : 0);
         #endif
       }
     #endif // SDSUPPORT && ULTIPANEL
